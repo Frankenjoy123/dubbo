@@ -31,13 +31,14 @@ limitations under the License.
     <!--<dubbo:registry address="multicast://224.5.6.7:1234"/>-->
     <dubbo:registry id="zk01" address="zookeeper://127.0.0.1:2181">
     </dubbo:registry>
-    <dubbo:registry id="zk02" address="zookeeper://127.0.0.1:2181"/>
+    <!--<dubbo:registry id="zk02" address="zookeeper://127.0.0.1:2181"/>-->
     <!--<dubbo:registry address="redis://127.0.0.1:6379"/>-->
 
     <!-- generate proxy for the remote service, then demoService can be used in the same way as the
     local regular interface -->
+    <!--scope="local"-->
     <dubbo:reference id="demoService" group="g1" check="true" interface="com.alibaba.dubbo.demo.DemoService"
-                     client="netty4" timeout="10000" callbacks="1000" registry="zk01" filter="demo2">
+                     client="netty4" timeout="10000" callbacks="1000" filter="demo2">
         <!--<dubbo:method name="sayHello" />-->
 
         <!--url="registry://127.0.0.1:2181?registry=zookeeper;127.0.0.1:2181;127.0.0.1:27018"-->
@@ -49,17 +50,19 @@ limitations under the License.
         
     </dubbo:reference>
 
-    <!--<dubbo:reference id="demoService2" group="g2" check="false" interface="com.alibaba.dubbo.demo.DemoService" client="netty4" timeout="10000" callbacks="1000" registry="zk01" cluster="failback">-->
-        <!--&lt;!&ndash;<dubbo:method name="sayHello" />&ndash;&gt;-->
+    <dubbo:reference id="demoService2" group="g2" check="false" interface="com.alibaba.dubbo.demo.DemoService"
+                     stub="com.alibaba.dubbo.demo.consumer.DemoServiceStub"
+                     client="netty4" timeout="10000" callbacks="1000" registry="zk01" cluster="failback">
+        <!--<dubbo:method name="sayHello" />-->
 
-        <!--&lt;!&ndash;url="registry://127.0.0.1:2181?registry=zookeeper;127.0.0.1:2181;127.0.0.1:27018"&ndash;&gt;-->
+        <!--url="registry://127.0.0.1:2181?registry=zookeeper;127.0.0.1:2181;127.0.0.1:27018"-->
 
-        <!--<dubbo:parameter key="payload" value="1000" />-->
+        <dubbo:parameter key="payload" value="1000" />
 
-        <!--<dubbo:method name="sayHello" async="true" onreturn="callbackDemo.done" />-->
+        <dubbo:method name="sayHello" async="true" onreturn="callbackDemo.done" />
 
-    <!--</dubbo:reference>-->
+    </dubbo:reference>
 
-    <!--stub="com.alibaba.dubbo.demo.consumer.DemoServiceStub"-->
+
 
 </beans>

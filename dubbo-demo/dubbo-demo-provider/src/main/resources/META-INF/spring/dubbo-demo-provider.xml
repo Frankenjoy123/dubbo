@@ -33,7 +33,10 @@ limitations under the License.
     <!--<dubbo:registry address="zookeeper://127.0.0.1:2181"/>-->
     <!--<dubbo:registry address="zookeeper://127.0.0.1:2181||10.20.153.11:2181,10.20.153.12:2181"/>-->
     <dubbo:registry address="zookeeper://127.0.0.1:2181"  />
-    <!--<dubbo:registry address="redis://127.0.0.1:6379" />-->
+
+    <!-- use dubbo protocol to export service on port 20880 -->
+    <dubbo:protocol accesslog="true" name="dubbo" port="-1" server="netty4" />
+    <!--<dubbo:protocol id="pb" name="dubbo" port="20881"/>-->
 
 
     <bean id="demoDAO" class="com.alibaba.dubbo.demo.provider.DemoDAO" />
@@ -44,16 +47,19 @@ limitations under the License.
     <!--<bean id="genericService" class="com.alibaba.dubbo.demo.provider.MyGenericService" />-->
 
     <!-- declare the service interface to be exported -->
-    <dubbo:service  interface="com.alibaba.dubbo.demo.DemoService" group="g1" ref="demoService" filter="demo" deprecated="false" callbacks="1000" timeout="200000" accesslog="true"
-        >
+    <!--scope="local"-->
+    <dubbo:service  interface="com.alibaba.dubbo.demo.DemoService" group="g1" ref="demoService"
+                    filter="demo"
+                    deprecated="false"
+                    callbacks="1000" timeout="200000" accesslog="true">
     <!--<dubbo:service interface="com.alibaba.dubbo.demo.DemoService" protocol="dubbo" ref="demoService"/>-->
-    <!--<dubbo:service id="sa" interface="com.alibaba.dubbo.demo.DemoService" protocol="dubbo" class="com.alibaba.dubbo.demo.provider.DemoServiceImpl">-->
+        <!--<dubbo:service id="sa" interface="com.alibaba.dubbo.demo.DemoService" protocol="dubbo" class="com.alibaba.dubbo.demo.provider.DemoServiceImpl">-->
         <!--&lt;!&ndash;<dubbo:method name="sayHello" retries="100">&ndash;&gt;-->
-            <!--&lt;!&ndash;&lt;!&ndash;<dubbo:argument index="0" callback="true" />&ndash;&gt;&ndash;&gt;-->
-            <!--&lt;!&ndash;<dubbo:argument type="com.demo.CallbackListener" callback="true" />&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash;<dubbo:argument index="0" callback="true" />&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;<dubbo:argument type="com.demo.CallbackListener" callback="true" />&ndash;&gt;-->
         <!--&lt;!&ndash;</dubbo:method>&ndash;&gt;-->
         <!--<property name="demoDAO" ref="demoDAO" />-->
-    <!--</dubbo:service>-->
+        <!--</dubbo:service>-->
 
     <!--<dubbo:service id="sb" interface="com.alibaba.dubbo.demo.DemoService" ref="demoService">-->
         <!--&lt;!&ndash;<dubbo:method name="sayHello" retries="100">&ndash;&gt;-->
@@ -61,9 +67,10 @@ limitations under the License.
         <!--&lt;!&ndash;<dubbo:argument type="com.demo.CallbackListener" callback="true" />&ndash;&gt;-->
         <!--&lt;!&ndash;</dubbo:method>&ndash;&gt;-->
 
-        <!--<dubbo:parameter key="threadname" value="shuaiqi" />-->
-        <!--<dubbo:parameter key="threads" value="123" />-->
-        <!--<dubbo:parameter key="queues" value="10" />-->
+        <!--线程池设置-->
+        <dubbo:parameter key="threadname" value="shuaiqi" />
+        <dubbo:parameter key="threads" value="123" />
+        <dubbo:parameter key="queues" value="10" />
 
         <!--<dubbo:method name="callbackParam">-->
             <!--<dubbo:argument callback="true" type="com.alibaba.dubbo.demo.ParamCallback" />-->
@@ -104,8 +111,5 @@ limitations under the License.
 
     <!--<dubbo:service interface="com.alibaba.dubbo.demo.BarService" ref="genericService" timeout="200000" />-->
 
-    <!-- use dubbo protocol to export service on port 20880 -->
-    <dubbo:protocol accesslog="true" name="dubbo" port="-1" server="netty4" />
-    <!--<dubbo:protocol id="pb" name="dubbo" port="20881"/>-->
 
 </beans>

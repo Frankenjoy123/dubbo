@@ -19,59 +19,68 @@ package com.alibaba.dubbo.demo.consumer;
 import com.alibaba.dubbo.demo.DemoService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.IOException;
+
 public class Consumer {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Prevent to get IPV6 address,this way only work in debug mode
         //But you can pass use -Djava.net.preferIPv4Stack=true,then it work well whether in debug mode or not
         System.setProperty("java.net.preferIPv4Stack", "true");
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-consumer.xml"});
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-consumer.xml"});
+
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-injvm.xml"});
+
         context.start();
         DemoService demoService = (DemoService) context.getBean("demoService"); // get remote service proxy
 
-        while (true) {
-            try {
-//                try {
-//                    demoService.sayHello(gen(1024000));
-//                } catch (Exception e) {
-//                }
+        demoService.sayHello("world");
 
-//                String hello = demoService.sayHello("world"); // call remote method
-//                System.out.println(hello); // get result
+        System.in.read();
 
-
-//                demoService.say01(null);
-//                demoService.say01("TestException");
-//                demoService.hello("01");
-//                ((EchoService) demoService).$echo("test4u");
-//                ((EchoService) demoService).$echo("test4u");
-
-                demoService.sayHello("world");
-//                ProtocolConfig.destroyAll();
-
-                Thread.sleep(10000000);
-//                demoService.say02();
-//                demoService.say03();
-//                demoService.say04();
-
-                // 参数回调
-                // https://dubbo.gitbooks.io/dubbo-user-book/demos/callback-parameter.html
-//                demoService.callbackParam("shuaiqi", new ParamCallback() {
-//                    @Override
-//                    public void doSome(Cat msg) {
-//                        System.out.println("回调biubiu：" + msg);
-//                    }
-//                });
-
-//                demoService.bye(new Cat().setName("小猫"));
-//                demoService.bye(new Dog().setAge(10));
-
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
-
-
-        }
+//        while (true) {
+//            try {
+////                try {
+////                    demoService.sayHello(gen(1024000));
+////                } catch (Exception e) {
+////                }
+//
+////                String hello = demoService.sayHello("world"); // call remote method
+////                System.out.println(hello); // get result
+//
+//
+////                demoService.say01(null);
+////                demoService.say01("TestException");
+////                demoService.hello("01");
+////                ((EchoService) demoService).$echo("test4u");
+////                ((EchoService) demoService).$echo("test4u");
+//
+//                demoService.sayHello("world");
+////                ProtocolConfig.destroyAll();
+//
+//                Thread.sleep(10000000);
+////                demoService.say02();
+////                demoService.say03();
+////                demoService.say04();
+//
+//                // 参数回调
+//                // https://dubbo.gitbooks.io/dubbo-user-book/demos/callback-parameter.html
+////                demoService.callbackParam("shuaiqi", new ParamCallback() {
+////                    @Override
+////                    public void doSome(Cat msg) {
+////                        System.out.println("回调biubiu：" + msg);
+////                    }
+////                });
+//
+////                demoService.bye(new Cat().setName("小猫"));
+////                demoService.bye(new Dog().setAge(10));
+//
+//            } catch (Throwable throwable) {
+//                throwable.printStackTrace();
+//            }
+//
+//
+//        }
 
     }
 
