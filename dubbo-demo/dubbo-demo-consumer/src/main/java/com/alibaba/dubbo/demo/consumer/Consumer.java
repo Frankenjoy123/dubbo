@@ -17,6 +17,7 @@
 package com.alibaba.dubbo.demo.consumer;
 
 import com.alibaba.dubbo.demo.DemoService;
+import com.alibaba.dubbo.rpc.service.EchoService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
@@ -27,14 +28,18 @@ public class Consumer {
         //Prevent to get IPV6 address,this way only work in debug mode
         //But you can pass use -Djava.net.preferIPv4Stack=true,then it work well whether in debug mode or not
         System.setProperty("java.net.preferIPv4Stack", "true");
-//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-consumer.xml"});
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-consumer.xml"});
 
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-injvm.xml"});
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/dubbo-demo-injvm.xml"});
 
         context.start();
         DemoService demoService = (DemoService) context.getBean("demoService"); // get remote service proxy
 
-        demoService.sayHello("world");
+        String result = demoService.sayHello("world");
+        System.out.println(result);
+
+        EchoService echoService = (EchoService) demoService;
+        System.out.println(echoService.$echo("ok"));
 
         System.in.read();
 

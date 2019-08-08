@@ -45,9 +45,9 @@ limitations under the License.
         
         <dubbo:parameter key="payload" value="1000" />
 
+        <dubbo:method name="sayHello" async="true"   onreturn="callbackDemo.done" />
 
-        <!--<dubbo:method name="sayHello" async="true" onreturn="callbackDemo.done" />-->
-        
+        <!--oninvoke="callbackDemo.before"-->
     </dubbo:reference>
 
     <dubbo:reference id="demoService2" group="g2" check="false" interface="com.alibaba.dubbo.demo.DemoService"

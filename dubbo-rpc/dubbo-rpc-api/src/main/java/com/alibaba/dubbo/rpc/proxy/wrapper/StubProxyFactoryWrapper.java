@@ -46,6 +46,7 @@ public class StubProxyFactoryWrapper implements ProxyFactory {
 
     /**
      * ProxyFactory$Adaptive 对象
+     * JavassistProxyFactory 或者 JavassistProxyFactory 对象
      */
     private final ProxyFactory proxyFactory;
     /**
