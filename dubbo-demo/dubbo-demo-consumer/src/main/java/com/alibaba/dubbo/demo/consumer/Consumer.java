@@ -17,6 +17,7 @@
 package com.alibaba.dubbo.demo.consumer;
 
 import com.alibaba.dubbo.demo.DemoService;
+import com.alibaba.dubbo.demo.entity.User;
 import com.alibaba.dubbo.rpc.service.EchoService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -38,8 +39,19 @@ public class Consumer {
         String result = demoService.sayHello("world");
         System.out.println(result);
 
+        result = demoService.sayHello("world");
+        System.out.println(result);
+
         EchoService echoService = (EchoService) demoService;
         System.out.println(echoService.$echo("ok"));
+
+        User user = new User();
+        user.setUsername("xxx");
+        user.setPassword("aaa");
+        demoService.save(user);
+
+        user.setPassword(null);
+        demoService.save(user);
 
         System.in.read();
 

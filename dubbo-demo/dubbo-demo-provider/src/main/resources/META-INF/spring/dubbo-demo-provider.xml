@@ -51,7 +51,9 @@ limitations under the License.
     <dubbo:service  interface="com.alibaba.dubbo.demo.DemoService" group="g1" ref="demoService"
                     filter="demo"
                     deprecated="false"
-                    callbacks="1000" timeout="200000" accesslog="true">
+                    callbacks="1000" timeout="200000"
+                    token="true"
+                    accesslog="true">
     <!--<dubbo:service interface="com.alibaba.dubbo.demo.DemoService" protocol="dubbo" ref="demoService"/>-->
         <!--<dubbo:service id="sa" interface="com.alibaba.dubbo.demo.DemoService" protocol="dubbo" class="com.alibaba.dubbo.demo.provider.DemoServiceImpl">-->
         <!--&lt;!&ndash;<dubbo:method name="sayHello" retries="100">&ndash;&gt;-->
@@ -77,6 +79,8 @@ limitations under the License.
         <!--</dubbo:method>-->
         <dubbo:method name="say01" deprecated="true" />
 
+        <!--<dubbo:method name="sayHello" timeout="1" />-->
+        <dubbo:method name="sayHello"  />
 
     </dubbo:service>
 

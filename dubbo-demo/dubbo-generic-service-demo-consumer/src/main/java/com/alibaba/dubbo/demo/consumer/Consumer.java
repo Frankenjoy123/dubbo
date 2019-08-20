@@ -33,6 +33,9 @@ public class Consumer {
             try {
                 Thread.sleep(1000);
 
+                Object result1 = demoService.sayHello("hello");
+                System.out.println("result: " + result1);
+
                 Object result = demoService.say01("NIHAO");
                 System.out.println("result: " + result);
 

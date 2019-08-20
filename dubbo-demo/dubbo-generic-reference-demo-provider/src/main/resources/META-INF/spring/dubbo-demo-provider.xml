@@ -37,6 +37,6 @@ limitations under the License.
     <!-- declare the service interface to be exported -->
     <dubbo:service interface="com.alibaba.dubbo.demo.DemoService" ref="demoService" timeout="200000" />
 
-    <dubbo:protocol name="dubbo" port="20880" />
+    <dubbo:protocol name="dubbo" port="20883" />
 
 </beans>

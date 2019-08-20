@@ -3,8 +3,9 @@ package com.alibaba.dubbo.demo.entity;
 import com.alibaba.dubbo.demo.DemoService;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable{
 
     @NotNull(message = "用户名不能为空")
     private String username;

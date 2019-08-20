@@ -39,13 +39,17 @@ limitations under the License.
     <!--scope="local"-->
     <dubbo:reference id="demoService" group="g1" check="true" interface="com.alibaba.dubbo.demo.DemoService"
                      client="netty4" timeout="10000" callbacks="1000" filter="demo2">
-        <!--<dubbo:method name="sayHello" />-->
+
+        <!--<dubbo:method name="sayHello" cache="lru"/>-->
+        <dubbo:method name="sayHello" cache="jcache"/>
+
+        <dubbo:method name="save" validation="true"/>
 
         <!--url="registry://127.0.0.1:2181?registry=zookeeper;127.0.0.1:2181;127.0.0.1:27018"-->
         
         <dubbo:parameter key="payload" value="1000" />
 
-        <dubbo:method name="sayHello" async="true"   onreturn="callbackDemo.done" />
+        <!--<dubbo:method name="sayHello" async="true"   onreturn="callbackDemo.done" />-->
 
         <!--oninvoke="callbackDemo.before"-->
     </dubbo:reference>

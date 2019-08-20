@@ -22,7 +22,7 @@ limitations under the License.
         <artifactId>dubbo-demo</artifactId>
         <version>2.6.1</version>
     </parent>
-    <artifactId>dubbo-generic-reference-demo-consumer</artifactId>
+    <artifactId>dubbo-generic-reference-demo-provider</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
     <description>The demo provider module of dubbo project</description>
