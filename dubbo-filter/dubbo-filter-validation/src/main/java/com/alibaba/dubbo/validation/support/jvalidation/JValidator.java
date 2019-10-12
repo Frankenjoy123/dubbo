@@ -189,6 +189,9 @@ public class JValidator implements Validator {
                 }
                 // 生成类
                 parameterClass = ctClass.toClass(clazz.getClassLoader(), null);
+
+                //debug输出class file
+//                ctClass.debugWriteFile("/Users/zhouxiaowu/javassist");
             }
             // 创建 Bean 对象
             Object parameterBean = parameterClass.newInstance();
