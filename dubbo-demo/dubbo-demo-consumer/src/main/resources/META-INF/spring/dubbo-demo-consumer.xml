@@ -41,7 +41,9 @@ limitations under the License.
                      client="netty4" timeout="10000" callbacks="1000" filter="demo2">
 
         <!--<dubbo:method name="sayHello" cache="lru"/>-->
-        <dubbo:method name="sayHello" cache="jcache" validation="true"/>
+        <!--<dubbo:method name="sayHello" cache="jcache" validation="true" />-->
+
+        <dubbo:method name="sayHello" mock="return null" />
 
         <dubbo:method name="save" validation="true"/>
 
